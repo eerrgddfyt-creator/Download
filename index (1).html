@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Neko Tower - Baixe para Android</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Neko Tower: empilhe blocos em um mundo de anime desenhado. Baixe o APK para Android.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@600;800&display=swap">
+<style>
+  :root{--ink:#1b1a3a;--paper:#fffdf5;--pink:#ff7aa8;--sun:#ffd23f;--sky:#7fd4ff;color-scheme:light}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Nunito,system-ui,sans-serif;font-weight:600;font-size:1.05rem;line-height:1.5;color:var(--ink);background:linear-gradient(#ffb3cf,#ffd9c2 40%,#fff3c9 75%,#c9ecff)}
+  h1,h2,h3,.btn,.logo{font-family:Bangers,Impact,sans-serif;font-weight:400;letter-spacing:.05em;line-height:1}
+  a{color:inherit}
+  :focus-visible{outline:4px solid var(--ink);outline-offset:4px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+  /* Caixas desenhadas à mão: borda irregular, sombra deslocada e traço tremido */
+  .panel,.btn{background:var(--paper);border:4px solid var(--ink);border-radius:255px 15px 225px 15px/15px 225px 15px 255px;box-shadow:7px 7px 0 var(--ink);filter:url(#rough)}
+  .panel{padding:22px 24px}
+  .btn{display:inline-block;text-decoration:none;font-size:2rem;padding:14px 30px;background:var(--pink);transition:transform .1s,box-shadow .1s}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--ink)}
+  .btn:active{transform:translate(5px,5px);box-shadow:2px 2px 0 var(--ink)}
+  .btn.alt{background:var(--sun);font-size:1.5rem}
+
+  header{padding:calc(env(safe-area-inset-top,0px) + 14px) 0 0}
+  header .wrap{display:flex;justify-content:space-between;align-items:center}
+  .logo{font-size:2rem;color:#fff;-webkit-text-stroke:6px var(--ink);paint-order:stroke fill;text-decoration:none}
+  nav a{margin-left:18px;font-weight:800;text-decoration:none}
+  nav a:hover{text-decoration:underline wavy}
+
+  /* Herói com raios de mangá */
+  .hero{position:relative;overflow:hidden;padding:40px 0 70px;background:repeating-conic-gradient(from 0deg at 72% 55%,rgba(255,255,255,.24) 0 5deg,transparent 5deg 14deg)}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
+  h1{font-size:clamp(3.4rem,11vw,6.6rem);color:#fff;-webkit-text-stroke:12px var(--ink);paint-order:stroke fill;text-shadow:7px 7px 0 var(--ink);margin:0 0 16px;transform:rotate(-2deg)}
+  .lead{font-size:1.25rem;max-width:30ch;margin:0 0 26px;font-weight:800}
+  .cta{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+  .note{margin:16px 0 0;font-size:.95rem}
+  .art svg{width:100%;height:auto;max-width:430px;display:block;margin:0 auto}
+
+  section{padding:46px 0}
+  h2{font-size:clamp(2.2rem,6vw,3.4rem);color:#fff;-webkit-text-stroke:9px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--ink);margin:0 0 28px;transform:rotate(-1deg)}
+  h3{font-size:1.8rem;margin:0 0 8px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .panel p{margin:0}
+  .grid .panel:nth-child(2){transform:rotate(1.2deg);background:#fff6d6}
+  .grid .panel:nth-child(odd){transform:rotate(-1deg)}
+  .step{display:inline-grid;place-items:center;width:46px;height:46px;border:4px solid var(--ink);border-radius:50%;background:var(--sun);font-family:Bangers,Impact,sans-serif;font-size:1.6rem;margin-bottom:10px}
+  .feat .panel:nth-child(1){background:#ffe3ef}.feat .panel:nth-child(2){background:#e3f5ff}.feat .panel:nth-child(3){background:#eafbd9}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chips span{border:3px solid var(--ink);border-radius:20px;padding:2px 12px;background:#fff;font-weight:800}
+  .install{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .final{text-align:center}
+  .final .panel{padding:36px 20px;background:var(--sun);transform:rotate(-1deg)}
+  .final h2{margin-bottom:18px}
+  footer{padding:30px 0 calc(env(safe-area-inset-bottom,0px) + 30px);text-align:center;font-weight:800}
+
+  /* Torre animada (mesma do jogo) */
+  @media(max-width:760px){
+    .hero .wrap,.grid,.install{grid-template-columns:1fr}
+    .hero{padding-top:20px}
+    .art{order:-1}
+    nav a:not(:last-child){display:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<!-- Filtro que deixa o traço tremido, como desenhado a mão -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter></svg>
+
+<header><div class="wrap">
+  <a class="logo" href="#topo">NEKO TOWER</a>
+  <nav><a href="#como-jogar">Como jogar</a><a href="#recursos">Recursos</a><a href="neko-tower.apk">Instalar</a></nav>
+</div></header>
+
+<main id="topo">
+  <div class="hero"><div class="wrap">
+    <div>
+      <h1>NEKO<br>TOWER</h1>
+      <p class="lead">Empilhe os blocos, acerte o encaixe perfeito e construa a torre mais alta do céu.</p>
+      <div class="cta">
+        <a class="btn" id="dl" href="neko-tower.apk" download>Baixar APK</a>
+        <a class="btn alt" id="play" href="https://cesarfa5555-sys.github.io/Neko-tower/" hidden>Jogar no navegador</a>
+      </div>
+      <p class="note">Para celulares Android.</p>
+    </div>
+    <div class="art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380" role="img" aria-label="Torre de blocos com orelhas de gato" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo5ZTAxZjRkMy01NzZmLTQ4MmQtYTAxNC05NmNiODAyNjg3ZjIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaLrVAKOuWDdhXEya34C4AjgAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDozYmU3N2ZlNS1lYTcxLTQ3NmQtYWViNy0xNjVhNzE3YTEwMDFscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoYnmSCuc59DO9g64WtzfW3gAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggVb+UUY2RO/GiTKRo4J0eyc6KwBJJARbReCKDjLvujHykZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaF58tRKGXJ3fGKVhLEAUlbUAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCBx19AwGBJDZxqRjHN3gKIm9nv/FsKQO8KSm6+CwzFSrWRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBiWZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjllMDFmNGQzLTU3NmYtNDgyZC1hMDE0LTk2Y2I4MDI2ODdmMi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmJmMzc0MWRiLTUwZGQtNGNkNy05ZDNhLWRiYzZlNWQwZWZiM3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBVv5RRjZE78aJMpGjgnR7JzorAEkkBFtF4IoOMu+6MfKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggJuN+eFZO8jM3ZlsqjvfxpomuHBh+sVIC6PRXTI35RAyiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFgglGdYMeWagXRRr3YURP4HfaFvobvI+GLRRVR2h2RXC1F0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQDAczL2KBmnAPySYFvGumKcpHK2HLJckjCnLzNcpZ5yxyemL4UZqDghNzi6Yrb2oavpesaJM5uoPUuc04U11kn0=</c2pa:manifest></metadata><style>@keyframes nkDrop{0%{transform:translateY(-260px);opacity:0}14%{transform:translateY(0);opacity:1}18%{transform:translateY(-10px)}22%,78%{transform:translateY(0);opacity:1}92%,100%{transform:translateY(0);opacity:0}}.nk{animation:nkDrop 3.2s infinite}@media(prefers-reduced-motion:reduce){.nk{animation:none}}</style><defs><pattern id="nkh" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#1b1a3a" stroke-opacity=".3" stroke-width="3.5"/></pattern></defs><ellipse cx="200" cy="330" rx="130" ry="26" fill="#1b1a3a" fill-opacity=".25"/><g class="nk" style="animation-delay:0.0s"><polygon points="90,245 200,300 200,336 90,281" fill="hsl(262,65%,64%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="200,300 310,245 310,281 200,336" fill="hsl(262,60%,52%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="200,300 310,245 310,281 200,336" fill="url(#nkh)"/><polygon points="200,190 310,245 200,300 90,245" fill="hsl(262,80%,80%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/></g><g class="nk" style="animation-delay:0.45s"><polygon points="116,204 216,254 216,290 116,240" fill="hsl(300,65%,64%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="216,254 316,204 316,240 216,290" fill="hsl(300,60%,52%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="216,254 316,204 316,240 216,290" fill="url(#nkh)"/><polygon points="216,154 316,204 216,254 116,204" fill="hsl(300,80%,80%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/></g><g class="nk" style="animation-delay:0.9s"><polygon points="94,165 188,212 188,248 94,201" fill="hsl(335,65%,64%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="188,212 282,165 282,201 188,248" fill="hsl(335,60%,52%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="188,212 282,165 282,201 188,248" fill="url(#nkh)"/><polygon points="188,118 282,165 188,212 94,165" fill="hsl(335,80%,80%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/></g><g class="nk" style="animation-delay:1.35s"><polygon points="130,120 130,61 156,107" fill="hsl(10,80%,80%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="138,113 128,80 148,108" fill="#ff7aa8" stroke="#1b1a3a" stroke-width="3.3" stroke-linejoin="round"/><polygon points="256,107 282,61 282,120" fill="hsl(10,80%,80%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="264,108 284,80 274,113" fill="#ff7aa8" stroke="#1b1a3a" stroke-width="3.3" stroke-linejoin="round"/><polygon points="120,125 206,168 206,204 120,161" fill="hsl(10,65%,64%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="206,168 292,125 292,161 206,204" fill="hsl(10,60%,52%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><polygon points="206,168 292,125 292,161 206,204" fill="url(#nkh)"/><polygon points="206,82 292,125 206,168 120,125" fill="hsl(10,80%,80%)" stroke="#1b1a3a" stroke-width="6" stroke-linejoin="round"/><g transform="translate(180,173) skewY(26.57)"><ellipse rx="10" ry="15" fill="#1b1a3a"/><ellipse cx="-3" cy="-5" rx="4" ry="5" fill="#fff"/><circle cx="3" cy="5" r="1.9" fill="#fff"/><ellipse cx="16" cy="12" rx="8" ry="4" fill="#ff7aa8" fill-opacity=".7"/></g><g transform="translate(232,173) skewY(-26.57)"><ellipse rx="10" ry="15" fill="#1b1a3a"/><ellipse cx="-3" cy="-5" rx="4" ry="5" fill="#fff"/><circle cx="3" cy="5" r="1.9" fill="#fff"/><ellipse cx="-16" cy="12" rx="8" ry="4" fill="#ff7aa8" fill-opacity=".7"/></g></g></svg></div>
+  </div></div>
+
+  <section id="como-jogar"><div class="wrap">
+    <h2>Como jogar</h2>
+    <div class="grid">
+      <div class="panel"><span class="step">1</span><h3>Toque na hora certa</h3><p>O bloco vai e volta pela tela. Toque para soltar e empilhar em cima do anterior.</p></div>
+      <div class="panel"><span class="step">2</span><h3>O que sobrar, cai</h3><p>Tudo que passar da base é cortado. A cada erro o bloco fica menor, e se errar por completo o jogo acaba.</p></div>
+      <div class="panel"><span class="step">3</span><h3>Encaixe perfeito</h3><p>Acertou em cheio? Você faz combo, e com quatro encaixes perfeitos seguidos o bloco volta a crescer.</p></div>
+    </div>
+  </div></section>
+
+  <section id="recursos"><div class="wrap">
+    <h2>Recursos</h2>
+    <div class="grid feat">
+      <div class="panel"><h3>Anime desenhado</h3><p>Blocos com contorno de tinta, sombras em traços e um céu que muda de cor conforme a torre sobe.</p></div>
+      <div class="panel"><h3>Seu celular, seu gráfico</h3><p>Escolha o nível que roda melhor no seu aparelho.</p><div class="chips"><span>Baixo</span><span>Médio</span><span>Ultra</span></div></div>
+      <div class="panel"><h3>Modo online</h3><p>Crie uma sala, passe o código para os amigos e veja quem aguenta mais tempo sem errar.</p></div>
+    </div>
+  </div></section>
+
+  <section id="instalar"><div class="wrap">
+    <h2>Como instalar</h2>
+    <div class="install">
+      <div class="panel"><span class="step">1</span><h3>Baixe o APK</h3><p>Toque em Baixar APK e espere o arquivo terminar de baixar.</p></div>
+      <div class="panel"><span class="step">2</span><h3>Permita a instalação</h3><p>Abra o arquivo. Se o Android perguntar, permita instalar apps vindos desta fonte.</p></div>
+      <div class="panel"><span class="step">3</span><h3>Jogue</h3><p>Instalou? Abra o Neko Tower e comece a empilhar.</p></div>
+    </div>
+  </div></section>
+
+  <section class="final"><div class="wrap"><div class="panel">
+    <h2>Pronto para subir?</h2>
+    <a class="btn" id="dl2" href="neko-tower.apk" download>Baixar APK</a>
+  </div></div></section>
+</main>
+
+<footer>Feito por NEK Studios</footer>
+
+<script>
+// ====== CONFIGURE AQUI ======
+// Caminho ou link do seu APK. Ex.: 'neko-tower.apk' (arquivo na mesma pasta deste index.html)
+const APK_URL = 'neko-tower.apk';
+// Opcional: link para jogar no navegador. Deixe vazio para esconder o botão.
+const PLAY_URL = 'https://cesarfa5555-sys.github.io/Neko-tower/';
+// ============================
+['dl', 'dl2'].forEach(id => { document.getElementById(id).href = APK_URL; }); // liga os botões de download ao APK
+if (PLAY_URL) { const p = document.getElementById('play'); p.href = PLAY_URL; p.hidden = false; }
+</script>
+</body>
+</html>
